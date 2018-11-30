@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const kurssi = {
+const kurssit = [
+  {
     nimi: 'Half Stack -sovelluskehitys',
+    id: 1,
     osat: [
       {
         nimi: 'Reactin perusteet',
@@ -20,28 +22,52 @@ const kurssi = {
         id: 3
       }
     ]
+  },
+  {
+    nimi: 'Node.js',
+    id: 2,
+    osat: [
+      {
+        nimi: 'Routing',
+        tehtavia: 3,
+        id: 1
+      },
+      {
+        nimi: 'Middlewaret',
+        tehtavia: 7,
+        id: 2
+      }
+    ]
   }
+]
+
 
 const App = (props) => {
-  const { kurssi } = props;
-  const Sisalto = () => kurssi.osat.map(osa => <li key={osa.id}>{osa.nimi}</li>)
-  const Otsikko = () => <h1>{kurssi.nimi}</h1>
-  const Tehtavia = () => kurssi.osat.reduce(function(sum, tehtava){
+  const { kurssit } = props;
+  const Sisalto = () => kurssit.map((kurssit, index) => 
+    <div key={index}>
+    <h1>{kurssit.nimi}</h1>
+      <ul>
+        {kurssit.osat.map((osa) =>
+          <li key = {osa.id}>{osa.nimi} {osa.tehtavia}</li>)}
+      </ul>
+    </div>
+  )
+  const Otsikko = () => <h1>{kurssit.nimi}</h1>
+  /*const Tehtavia = () => kurssit.osat.reduce(function(sum, tehtava){
   return sum + tehtava.tehtavia
-  }, 0)
-
+  }, 0)*/
   return (
     <div>
       <ul>
         {Otsikko()}
         {Sisalto()}
-        Tehtavia: {Tehtavia()}
       </ul>
     </div>
   )
 }
 
 ReactDOM.render(
-  <App kurssi={kurssi} />,
+  <App kurssit={kurssit} />,
   document.getElementById('root')
 )
