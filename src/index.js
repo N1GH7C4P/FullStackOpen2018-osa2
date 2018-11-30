@@ -25,13 +25,17 @@ const kurssi = {
 const App = (props) => {
   const { kurssi } = props;
   const Sisalto = () => kurssi.osat.map(osa => <li key={osa.id}>{osa.nimi}</li>)
-  const Otsikko = () => <h1>{kurssi.nimi}</h1> 
+  const Otsikko = () => <h1>{kurssi.nimi}</h1>
+  const Tehtavia = () => kurssi.osat.reduce(function(sum, tehtava){
+  return sum + tehtava.tehtavia
+  }, 0)
 
   return (
     <div>
       <ul>
         {Otsikko()}
         {Sisalto()}
+        Tehtavia: {Tehtavia()}
       </ul>
     </div>
   )
