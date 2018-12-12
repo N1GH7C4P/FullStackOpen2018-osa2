@@ -41,29 +41,25 @@ const kurssit = [
   }
 ]
 
-
-const App = (props) => {
-  const { kurssit } = props;
-  const Sisalto = () => kurssit.map((kurssit, index) => 
-    <div key={index}>
-    <h1>{kurssit.nimi}</h1>
-      <ul>
-        {kurssit.osat.map((osa) =>
-          <li key = {osa.id}>{osa.nimi} {osa.tehtavia}</li>)}
-      </ul>
-    </div>
+const Kurssi = ({ kurssi }) => {
+  return (
+    <li>{kurssi.nimi} {kurssi.tehtavia}</li>
   )
-  const Otsikko = () => <h1>{kurssit.nimi}</h1>
+}
+
+const App = ({kurssit}) => {
   /*const Tehtavia = () => kurssit.osat.reduce(function(sum, tehtava){
   return sum + tehtava.tehtavia
   }, 0)*/
   return (
-    <div>
-      <ul>
-        {Otsikko()}
-        {Sisalto()}
-      </ul>
-    </div>
+      kurssit.map((kurssit, index) => 
+      <div key={index}>
+      <h1>{kurssit.nimi}</h1>
+        <ul>
+          {kurssit.osat.map(kurssi => <Kurssi key = {kurssi.id} kurssi={kurssi}/>)}
+        </ul>
+      </div>
+    )
   )
 }
 
